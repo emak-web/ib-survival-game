@@ -1,4 +1,4 @@
-from item_type import ItemType
+from entities.item_type import ItemType
 
 
 ITEM_CONFIG = {

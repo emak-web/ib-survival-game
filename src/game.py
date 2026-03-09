@@ -42,6 +42,7 @@ class Game:
             request = self.update(dt)
             if request:
                 self.switch(request)
+                print(self.scene)
             self.draw()
 
         pygame.quit()
@@ -69,4 +70,6 @@ class Game:
             self.scene = MenuScene(self.ctx)
         elif request == SceneType.LEVEL:
             self.scene = LevelScene(self.ctx)
+
+
 

@@ -1,3 +1,9 @@
+import pygame
+import random 
+
+import settings
+from entities.item_type import ItemType
+from entities.item import Item
 
 
 class ItemList:
@@ -5,12 +11,30 @@ class ItemList:
         self.items = []
     
     def draw(self, screen):
-        pass
+        for item in self.items:
+            item.draw(screen)
 
-    def update(self, dt):
-        pass
+    def update(self, dt, bounds):
+        for item in self.items:
+            item.update(dt)
 
-    def generate_new_item(self):
-        pass
+            if item.rect.y >= bounds[1]:
+                self.items.remove(item)
+
+    def spawn(self, bounds):
+        self.items.append(Item(ItemType.EE, random.randint(*bounds), 0, 50, 50))
+
+    def check_collision_falling_object(self, player_rect):
+        n = 0
+        for item in self.items:
+            if player_rect.colliderect(item.rect):
+                self.items.remove(item)
+                n += 1
+        return n
+                
+    
+        
+        
+        
 
     
