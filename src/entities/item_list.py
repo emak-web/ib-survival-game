@@ -22,12 +22,11 @@ class ItemList:
     def spawn(self, bounds):
         self.items.append(Item(ItemType.EE, random.randint(*bounds), 0, 50, 50))
 
-    def check_collisions(self, rect):
+    def check_collisions(self, player_rect):
         n = 0
         for item in self.items:
-            if rect.colliderect(item.rect):
+            if player_rect.colliderect(item.rect):
                 self.items.remove(item)
                 n += 1
-
         return n
-    
+

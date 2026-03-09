@@ -4,6 +4,7 @@ from scenes.scene import Scene
 from scenes.scene_type import SceneType
 from entities.player import Player
 from entities.item_list import ItemList
+
 from ui.hub import Hub
 from ui.label import Label
 
@@ -32,10 +33,9 @@ class LevelScene(Scene):
             self.item_list.spawn((0, self.ctx.settings.WIDTH))
             self.spawn_timer -= self.spawn_interval
 
-        self.item_list.update(dt, (0, self.ctx.settings.HEIGHT))
         self.player.update(dt, (0, self.ctx.settings.WIDTH))
-
-        self.score += self.item_list.check_collisions(self.player.rect) 
+        self.item_list.update(dt, (0, self.ctx.settings.HEIGHT))
+        self.score += self.item_list.check_collisions(self.player.rect)
 
     def draw(self, screen):
         self.item_list.draw(screen)

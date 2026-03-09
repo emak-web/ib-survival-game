@@ -1,6 +1,7 @@
 import pygame
 
 from entities.item_config import ITEM_CONFIG
+import settings
 
 
 class Item:
@@ -11,8 +12,8 @@ class Item:
         self.rect.center = (x, y)
 
     def update(self, dt):
-        self.rect.y += dt * 100
-
+        self.rect.y += dt * settings.ITEM_SPEED
+    
     def draw(self, screen):
-        pygame.draw.rect(screen, (0, 255, 0), self.rect)
+        pygame.draw.rect(screen, (255, 0, 0), self.rect)
 

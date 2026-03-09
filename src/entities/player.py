@@ -10,7 +10,7 @@ class Player:
     
     def update(self, dt, bounds):
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_RIGHT] and self.rect.x+self.rect.width < bounds[1]:
+        if keys[pygame.K_RIGHT] and self.rect.x + self.rect.width < bounds[1]:
             self.rect.x += dt * settings.PLAYER_SPEED
         elif keys[pygame.K_LEFT] and self.rect.x > bounds[0]:
             self.rect.x -= dt * settings.PLAYER_SPEED
