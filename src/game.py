@@ -8,9 +8,6 @@ import settings
 
 
 class Context:
-    """
-    Context data for each scene, settings with width/height etc, assets loader
-    """
     def __init__(self, settings, assets):
         self.settings = settings
         self.assets = assets
@@ -37,11 +34,14 @@ class Game:
             for event in pygame.event.get():
                 request = self.handle_event(event)
                 if request:
-                    self.switch(request)
+                    kind, data = request
+                    self.switch(kind, data)
 
             request = self.update(dt)
             if request:
-                self.switch(request)
+                kind, data = request
+                self.switch(kind, data)
+
             self.draw()
 
         pygame.quit()
@@ -64,9 +64,9 @@ class Game:
         self.scene.draw(self.screen)
         pygame.display.flip()
 
-    def switch(self, request):
+    def switch(self, request, data):
         if request == SceneType.MENU:
             self.scene = MenuScene(self.ctx)
         elif request == SceneType.LEVEL:
-            self.scene = LevelScene(self.ctx)
+            self.scene = LevelScene(self.ctx, data["level_type"])
 
