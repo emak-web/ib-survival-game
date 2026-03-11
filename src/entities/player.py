@@ -4,9 +4,11 @@ import settings
 
 
 class Player:
-    def __init__(self, x, y, width, height):
-        self.rect = pygame.Rect(0, 0, width, height)
-        self.rect.center = (x, y)
+    def __init__(self, sprite, x, y, width, height):
+        self.image = sprite
+        self.rect = sprite.get_rect(center=(x, y))
+        # self.rect = pygame.Rect(0, 0, width, height)
+        # self.rect.center = (x, y)
     
     def update(self, dt, bounds):
         keys = pygame.key.get_pressed()
@@ -16,5 +18,5 @@ class Player:
             self.rect.x -= dt * settings.PLAYER_SPEED
     
     def draw(self, screen):
-        pygame.draw.rect(screen, (0, 255, 0), self.rect)
+        screen.blit(self.image, self.rect)
 

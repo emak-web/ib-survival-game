@@ -1,5 +1,5 @@
-WIDTH = 900
-HEIGHT = 600
+WIDTH = 960
+HEIGHT = 640
 FPS = 60
 CAPTION = "IB Survival Game"
 
