@@ -2,6 +2,7 @@ import pygame
 
 from scenes.menu_scene import MenuScene
 from scenes.level_scene import LevelScene
+from scenes.game_over_scene import GamOverScene
 from scenes.scene_type import SceneType
 from assets import Assets
 import settings
@@ -69,4 +70,6 @@ class Game:
             self.scene = MenuScene(self.ctx)
         elif request == SceneType.LEVEL:
             self.scene = LevelScene(self.ctx, data["level_type"])
+        elif request == SceneType.GAME_OVER:
+            self.scene = GamOverScene(self.ctx, data)
 
