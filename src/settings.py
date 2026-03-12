@@ -4,8 +4,8 @@ FPS = 60
 CAPTION = "IB Survival Game"
 
 PLAYER_SPEED = 500
-ITEM_SPEED = 100
-SPAWN_INTERVAL = 0.7
+ITEM_WIDTH = 150
+ITEM_HEIGHT = 150
 
 FONT_DIR = "assets/fonts"
 IMAGE_DIR = "assets/images"
