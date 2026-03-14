@@ -23,6 +23,11 @@ class GamOverScene(Scene):
             Button((self.ctx.settings.WIDTH//2, self.ctx.settings.HEIGHT//2+200), "Main menu", SceneType.MENU, None, self.font_title),
         )
 
+        if game_state["grade"] >= 25:
+            self.ctx.assets.sound("win.wav").play()
+        else:
+            self.ctx.assets.sound("lose.wav").play()
+
     def handle_event(self, event):
         result = self.hub.handle_event(event)
         if result:

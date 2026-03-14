@@ -10,12 +10,12 @@ class Player:
         # self.rect = pygame.Rect(0, 0, width, height)
         # self.rect.center = (x, y)
     
-    def update(self, dt, bounds):
+    def update(self, dt, bounds, player_speed):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_RIGHT] and self.rect.x + self.rect.width < bounds[1]:
-            self.rect.x += dt * settings.PLAYER_SPEED
+            self.rect.x += dt * player_speed
         elif keys[pygame.K_LEFT] and self.rect.x > bounds[0]:
-            self.rect.x -= dt * settings.PLAYER_SPEED
+            self.rect.x -= dt * player_speed
     
     def draw(self, screen):
         screen.blit(self.image, self.rect)
