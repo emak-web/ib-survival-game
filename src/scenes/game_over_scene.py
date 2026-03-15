@@ -12,6 +12,7 @@ class GamOverScene(Scene):
         self.font = self.ctx.assets.font(self.ctx.settings.DEFAULT_FONT, 20)
         self.font_title = self.ctx.assets.font(self.ctx.settings.DEFAULT_FONT, 30)
         self.game_state = game_state
+        self.click_sound = self.ctx.assets.sound("click.wav")
 
         title = "YOU SURVIVED THE IB" if game_state["grade"] >= 25 else "YOU DID NOT SURVIVE THE IB"
         self.hub = Hub(
@@ -19,8 +20,8 @@ class GamOverScene(Scene):
             Label((self.ctx.settings.WIDTH//2, self.ctx.settings.HEIGHT//2-80), f"Final grade: {game_state['grade']}", self.font),
             Label((self.ctx.settings.WIDTH//2, self.ctx.settings.HEIGHT//2-40), f"Stress: {game_state['stress']}", self.font),
             Label((self.ctx.settings.WIDTH//2, self.ctx.settings.HEIGHT//2), f"Energy: {game_state['energy']}", self.font),
-            Button((self.ctx.settings.WIDTH//2, self.ctx.settings.HEIGHT//2+100), "Play again", SceneType.LEVEL, {"level_type": game_state["level_type"]}, self.font_title),
-            Button((self.ctx.settings.WIDTH//2, self.ctx.settings.HEIGHT//2+200), "Main menu", SceneType.MENU, None, self.font_title),
+            Button((self.ctx.settings.WIDTH//2, self.ctx.settings.HEIGHT//2+100), "Play again", SceneType.LEVEL, {"level_type": game_state["level_type"]}, self.font_title, self.click_sound),
+            Button((self.ctx.settings.WIDTH//2, self.ctx.settings.HEIGHT//2+200), "Main menu", SceneType.MENU, None, self.font_title, self.click_sound),
         )
 
         if game_state["grade"] >= 25:

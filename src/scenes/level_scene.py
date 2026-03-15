@@ -33,8 +33,8 @@ class LevelScene(Scene):
         self.duration = self.config["duration"]
 
         self.font = self.ctx.assets.font(self.ctx.settings.DEFAULT_FONT, 20)
-        
-        self.frozen = False
+
+        self.freeze_internal = 0
 
         self.hub = Hub(
             Label((75, 65), "Grade:", self.font, color = (0, 0, 0)),
@@ -66,19 +66,22 @@ class LevelScene(Scene):
         
         self.duration -= dt
 
+        if self.freeze_internal > 0:
+            self.freeze_internal -= dt
+        else:
+            self.freeze_internal = 0
+
         self.spawn_timer += dt
+
         while self.spawn_timer >= self.spawn_interval:
             self.item_list.spawn((0, self.ctx.settings.WIDTH))
             self.spawn_timer -= self.spawn_interval
 
-        if self.stress_burnout() and not self.frozen:
-            self.frozen = True
-            self.freeze_start_time = time.time() #returns timestamp
+        if self.stress_burnout() and self.freeze_internal == 0:
+            self.freeze_internal = self.ctx.settings.STRESS_BURNOUT_TIME_INTERVAL
         
-        if self.frozen:
-            if (time.time() - self.freeze_start_time) >= self.ctx.settings.STRESS_BURNOUT_TIME_INTERVAL:
-                self.frozen = False
-                self.stress = 70
+        if self.freeze_internal > 0:
+            self.stress = 50
         else:
             self.player.update(dt, (0, self.ctx.settings.WIDTH), self.get_player_speed())
         

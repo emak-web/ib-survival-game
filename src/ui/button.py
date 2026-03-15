@@ -4,13 +4,14 @@ from ui.ui import UI
 
 
 class Button(UI):
-    def __init__(self, position, text, action, data, font):
+    def __init__(self, position, text, action, data, font, sound=None):
         self.position = position
         self.text = text
         self.font = font
         self.action = action
         self.data = data
-
+        self.sound = sound
+        
         self.text_surface = self.font.render(self.text, True, (255, 255, 255))
         self.text_rect = self.text_surface.get_rect(center=self.position)
 
@@ -19,6 +20,8 @@ class Button(UI):
     def handle_event(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.rect.collidepoint(event.pos):
+                if self.sound:
+                    self.sound.play()
                 return self.action, self.data
 
     def update(self, dt):
