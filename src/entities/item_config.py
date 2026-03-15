@@ -7,30 +7,30 @@ ITEM_CONFIG = {
         "effects": {
             "energy": -10,
             "stress": 10,
-            "grade": +1,
+            "grade": +5,
         }
     }, 
     ItemType.IB_EXAMS: {
         "path": "ib_exams.png",
         "effects": {
-            "energy": -20,
+            "energy": -15,
             "stress": 15,
-            "grade": +2,
+            "grade": +7,
         }
     }, 
     ItemType.COFFEE: {
         "path": "coffee.png",
         "effects": {
-            "energy": +10,
-            "stress": +1,
+            "energy": +15,
+            "stress": +5,
             "grade": 0,
         }
     }, 
     ItemType.FREE_PERIODS: {
         "path": "free_period.png",
         "effects": {
-            "energy": +10,
-            "stress": -10,
+            "energy": +5,
+            "stress": -5,
             "grade": 0,
         }
     }, 
@@ -46,16 +46,16 @@ ITEM_CONFIG = {
         "path": "sleep.png",
         "effects": {
             "energy": +20,
-            "stress": -10,
-            "grade": 0,
+            "stress": -5,
+            "grade": -1,
         }
     }, 
     ItemType.SOCIAL_MEDIA: {
         "path": "social_media.png",
         "effects": {
-            "energy": -2,
-            "stress": -2,
-            "grade": -1,
+            "energy": -5,
+            "stress": -10,
+            "grade": -5,
         }
     }, 
     ItemType.CAS: {
@@ -63,15 +63,15 @@ ITEM_CONFIG = {
         "effects": {
             "energy": -5,
             "stress": -5,
-            "grade": 0,
+            "grade": +1,
         }
     }, 
     ItemType.EE: {
         "path": "ee.png",
         "effects": {
-            "energy": -20,
+            "energy": -30,
             "stress": 20,
-            "grade": 2,
+            "grade": +3,
         }
     },
     ItemType.HOMEWORK: {
@@ -79,7 +79,7 @@ ITEM_CONFIG = {
         "effects": {
             "energy": -10,
             "stress": 5,
-            "grade": 1,
+            "grade": +4,
         }
     },  
     ItemType.IA: {
@@ -87,7 +87,7 @@ ITEM_CONFIG = {
         "effects": {
             "energy": -15,
             "stress": 10,
-            "grade": 3,
+            "grade": +3,
         }
     },
     ItemType.ORALS: {
@@ -95,7 +95,7 @@ ITEM_CONFIG = {
         "effects": {
             "energy": -15,
             "stress": 10,
-            "grade": 3,
+            "grade": +2,
         }
     },  
     ItemType.TOK: {
@@ -103,7 +103,7 @@ ITEM_CONFIG = {
         "effects": {
             "energy": -10,
             "stress": 10,
-            "grade": 2,
+            "grade": +3,
         }
     }, 
 }

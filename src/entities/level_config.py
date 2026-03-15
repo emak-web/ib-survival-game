@@ -6,15 +6,15 @@ LEVEL_CONFIG = {
     LevelType.PRE_IB: {
         "name": "Pre-IB",
         "background": "bg_preib.png",
-        "allowed_items": [ItemType.COFFEE, ItemType.SLEEP, ItemType.CAS, ItemType.HOMEWORK, ItemType.GYM],
+        "allowed_items": [ItemType.COFFEE, ItemType.SLEEP, ItemType.CAS, ItemType.HOMEWORK, ItemType.GYM, ItemType.FREE_PERIODS, ItemType.SOCIAL_MEDIA, ItemType.MOCKS],
         "spawn_interval": 1,
         "item_speed": 100,
-        "duration": 30
+        "duration": 45
     },
     LevelType.IB1: {
         "name": "IB1",
         "background": "bg_ib1.png",
-        "allowed_items": [ItemType.COFFEE, ItemType.SLEEP, ItemType.MOCKS, ItemType.TOK, ItemType.GYM, ItemType.EE, ItemType.HOMEWORK, ItemType.CAS],
+        "allowed_items": [ItemType.COFFEE, ItemType.SLEEP, ItemType.CAS, ItemType.HOMEWORK, ItemType.GYM, ItemType.FREE_PERIODS, ItemType.SOCIAL_MEDIA, ItemType.MOCKS, ItemType.EE, ItemType.IA, ItemType.TOK],
         "spawn_interval": 0.75,
         "item_speed": 200,
         "duration": 60
@@ -22,9 +22,9 @@ LEVEL_CONFIG = {
     LevelType.IB2: {
         "name": "IB2",
         "background": "bg_ib2.png",
-        "allowed_items": [ItemType.COFFEE, ItemType.SLEEP, ItemType.GYM, ItemType.SOCIAL_MEDIA, ItemType.IB_EXAMS, ItemType.EE, ItemType.TOK, ItemType.IA, ItemType.CAS, ItemType.HOMEWORK, ItemType.ORALS],
+        "allowed_items": [ItemType.COFFEE, ItemType.SLEEP, ItemType.CAS, ItemType.HOMEWORK, ItemType.GYM, ItemType.FREE_PERIODS, ItemType.SOCIAL_MEDIA, ItemType.MOCKS, ItemType.EE, ItemType.IA, ItemType.TOK, ItemType.ORALS, ItemType.IB_EXAMS],
         "spawn_interval": 0.5,
         "item_speed": 300,
-        "duration": 90
+        "duration": 60
     },
 }
