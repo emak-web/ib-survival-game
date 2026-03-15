@@ -3,10 +3,9 @@ from scenes.scene_type import SceneType
 from ui.hub import Hub
 from ui.button import Button
 from ui.label import Label
-from entities.level_type import LevelType
 
 
-class GamOverScene(Scene):
+class GameOverScene(Scene):
     def __init__(self, ctx, game_state):
         self.ctx = ctx
         self.font = self.ctx.assets.font(self.ctx.settings.DEFAULT_FONT, 20)
