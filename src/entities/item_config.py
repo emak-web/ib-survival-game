@@ -58,4 +58,52 @@ ITEM_CONFIG = {
             "grade": -1,
         }
     }, 
+    ItemType.CAS: {
+        "path": "cas.png",
+        "effects": {
+            "energy": -5,
+            "stress": -5,
+            "grade": 0,
+        }
+    }, 
+    ItemType.EE: {
+        "path": "ee.png",
+        "effects": {
+            "energy": -20,
+            "stress": 20,
+            "grade": 2,
+        }
+    },
+    ItemType.HOMEWORK: {
+        "path": "homework.png",
+        "effects": {
+            "energy": -10,
+            "stress": 5,
+            "grade": 1,
+        }
+    },  
+    ItemType.IA: {
+        "path": "ia.png",
+        "effects": {
+            "energy": -15,
+            "stress": 10,
+            "grade": 3,
+        }
+    },
+    ItemType.ORALS: {
+        "path": "orals.png",
+        "effects": {
+            "energy": -15,
+            "stress": 10,
+            "grade": 3,
+        }
+    },  
+    ItemType.TOK: {
+        "path": "tok.png",
+        "effects": {
+            "energy": -10,
+            "stress": 10,
+            "grade": 2,
+        }
+    }, 
 }

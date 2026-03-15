@@ -1,4 +1,5 @@
 import pygame
+import time
 
 from scenes.scene import Scene
 from scenes.scene_type import SceneType
@@ -10,7 +11,6 @@ from ui.label import Label
 from ui.progress_bar import ProgressBar
 from entities.item_config import ITEM_CONFIG
 from entities.level_config import LEVEL_CONFIG 
-
 
 class LevelScene(Scene):
     def __init__(self, ctx, level_type):
@@ -24,20 +24,26 @@ class LevelScene(Scene):
         self.background = self.ctx.assets.image(self.config["background"])
         self.background = pygame.transform.scale(self.background, (self.ctx.settings.WIDTH, self.ctx.settings.HEIGHT))
 
-        self.energy = 100
-        self.stress = 0
+        self.energy = 0
+        self.stress = 50
         self.grade = 0
 
         self.spawn_interval = self.config["spawn_interval"]
         self.spawn_timer = 0
         self.duration = self.config["duration"]
 
-        self.font = self.ctx.assets.font(self.ctx.settings.DEFAULT_FONT, 30)
+        self.font = self.ctx.assets.font(self.ctx.settings.DEFAULT_FONT, 20)
+
+        self.freeze_internal = 0
+
         self.hub = Hub(
-            Label((self.ctx.settings.WIDTH//2, self.ctx.settings.HEIGHT//2), "", self.font, lambda: f"{int(self.duration)}s left"),
-            ProgressBar((10, 10), 150, 30, 45, lambda: self.grade),
-            ProgressBar((10, 50), 150, 30, 100, lambda: self.stress),
-            ProgressBar((10, 90), 150, 30, 100, lambda: self.energy),
+            Label((75, 65), "Grade:", self.font, color = (0, 0, 0)),
+            Label((75, 105), "Stress:", self.font, color = (0, 0, 0)),
+            Label((75, 145), "Energy:", self.font, color = (0, 0, 0)),
+            ProgressBar((130, 50), 150, 30, 45, lambda: self.grade, (0, 0, 255)),
+            ProgressBar((130, 90), 150, 30, 100, lambda: self.stress, (255, 0, 0)),
+            ProgressBar((130, 130), 150, 30, 100, lambda: self.energy, (0, 255, 0)),
+            ProgressBar((0, 0), (self.ctx.settings.WIDTH), 25, self.duration, lambda: self.duration)
         )
 
     def generate_item_sprites(self):
@@ -60,12 +66,25 @@ class LevelScene(Scene):
         
         self.duration -= dt
 
+        if self.freeze_internal > 0:
+            self.freeze_internal -= dt
+        else:
+            self.freeze_internal = 0
+
         self.spawn_timer += dt
+
         while self.spawn_timer >= self.spawn_interval:
             self.item_list.spawn((0, self.ctx.settings.WIDTH))
             self.spawn_timer -= self.spawn_interval
 
-        self.player.update(dt, (0, self.ctx.settings.WIDTH))
+        if self.stress_burnout() and self.freeze_internal == 0:
+            self.freeze_internal = self.ctx.settings.STRESS_BURNOUT_TIME_INTERVAL
+        
+        if self.freeze_internal > 0:
+            self.stress = 50
+        else:
+            self.player.update(dt, (0, self.ctx.settings.WIDTH), self.get_player_speed())
+        
         self.item_list.update(dt, (0, self.ctx.settings.HEIGHT))
 
         self.update_score()
@@ -81,6 +100,8 @@ class LevelScene(Scene):
             self.stress = max(0, min(self.stress, 100))
             self.grade  = max(0, min(self.grade, 45))
 
+            self.ctx.assets.sound("collision.mpeg").play()
+
     def game_over_state(self):
         return {
             "level_type": self.level_type,
@@ -95,3 +116,8 @@ class LevelScene(Scene):
         self.player.draw(screen)
         self.hub.draw(screen)
 
+    def get_player_speed(self):
+        return self.ctx.settings.PLAYER_SPEED_MIN + (self.energy/100) * (self.ctx.settings.PLAYER_SPEED_MAX - self.ctx.settings.PLAYER_SPEED_MIN)
+
+    def stress_burnout(self):
+        return self.stress >= self.ctx.settings.STRESS_BURNOUT
