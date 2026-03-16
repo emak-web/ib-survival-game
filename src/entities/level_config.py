@@ -25,6 +25,6 @@ LEVEL_CONFIG = {
         "allowed_items": [ItemType.COFFEE, ItemType.SLEEP, ItemType.CAS, ItemType.HOMEWORK, ItemType.GYM, ItemType.FREE_PERIODS, ItemType.SOCIAL_MEDIA, ItemType.MOCKS, ItemType.EE, ItemType.IA, ItemType.TOK, ItemType.ORALS, ItemType.IB_EXAMS],
         "spawn_interval": 0.5,
         "item_speed": 300,
-        "duration": 60
+        "duration": 45
     },
 }

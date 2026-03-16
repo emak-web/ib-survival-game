@@ -1,11 +1,9 @@
 import pygame
-import time
 
 from scenes.scene import Scene
 from scenes.scene_type import SceneType
 from entities.player import Player
 from entities.item_list import ItemList
-from entities.item_type import ItemType
 from ui.hub import Hub
 from ui.label import Label
 from ui.progress_bar import ProgressBar
@@ -25,7 +23,7 @@ class LevelScene(Scene):
         self.background = pygame.transform.scale(self.background, (self.ctx.settings.WIDTH, self.ctx.settings.HEIGHT))
 
         self.energy = 0
-        self.stress = 50
+        self.stress = 0
         self.grade = 0
 
         self.spawn_interval = self.config["spawn_interval"]
@@ -44,6 +42,10 @@ class LevelScene(Scene):
             ProgressBar((130, 90), 150, 30, 100, lambda: self.stress, (255, 0, 0)),
             ProgressBar((130, 130), 150, 30, 100, lambda: self.energy, (0, 255, 0)),
             ProgressBar((0, 0), (self.ctx.settings.WIDTH), 25, self.duration, lambda: self.duration)
+        )
+        self.burnout_hub = Hub(
+            ProgressBar((self.ctx.settings.WIDTH//2-75, self.ctx.settings.HEIGHT//2-15), 150, 30, self.ctx.settings.STRESS_BURNOUT_TIME_INTERVAL, lambda: self.freeze_internal, (0, 0, 0)),
+            Label((self.ctx.settings.WIDTH//2, self.ctx.settings.HEIGHT//2-30), "Burnout", self.font, color = (0, 0, 0)),
         )
 
     def generate_item_sprites(self):
@@ -81,13 +83,14 @@ class LevelScene(Scene):
             self.freeze_internal = self.ctx.settings.STRESS_BURNOUT_TIME_INTERVAL
         
         if self.freeze_internal > 0:
-            self.stress = 50
+            self.stress = self.ctx.settings.BASE_STRESS
         else:
             self.player.update(dt, (0, self.ctx.settings.WIDTH), self.get_player_speed())
         
         self.item_list.update(dt, (0, self.ctx.settings.HEIGHT))
 
-        self.update_score()
+        if self.freeze_internal <= 0:
+            self.update_score()
 
     def update_score(self):
         item_type = self.item_list.check_collisions(self.player.rect)
@@ -115,6 +118,9 @@ class LevelScene(Scene):
         self.item_list.draw(screen)
         self.player.draw(screen)
         self.hub.draw(screen)
+
+        if self.freeze_internal > 0:
+            self.burnout_hub.draw(screen)
 
     def get_player_speed(self):
         return self.ctx.settings.PLAYER_SPEED_MIN + (self.energy/100) * (self.ctx.settings.PLAYER_SPEED_MAX - self.ctx.settings.PLAYER_SPEED_MIN)
