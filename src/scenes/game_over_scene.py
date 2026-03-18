@@ -11,7 +11,7 @@ class GameOverScene(Scene):
         self.font = self.ctx.assets.font(self.ctx.settings.DEFAULT_FONT, 20)
         self.font_title = self.ctx.assets.font(self.ctx.settings.DEFAULT_FONT, 30)
         self.game_state = game_state
-        self.click_sound = self.ctx.assets.sound("click.wav")
+        self.click_sound = self.ctx.assets.sound("click.ogg")
 
         title = "YOU SURVIVED THE IB" if game_state["grade"] >= 25 else "YOU DID NOT SURVIVE THE IB"
         self.hub = Hub(
@@ -24,9 +24,9 @@ class GameOverScene(Scene):
         )
 
         if game_state["grade"] >= 25:
-            self.ctx.assets.sound("win.wav").play()
+            self.ctx.assets.sound("win.ogg").play()
         else:
-            self.ctx.assets.sound("lose.wav").play()
+            self.ctx.assets.sound("lose.ogg").play()
 
     def handle_event(self, event):
         result = self.hub.handle_event(event)

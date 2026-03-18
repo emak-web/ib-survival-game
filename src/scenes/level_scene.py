@@ -103,7 +103,7 @@ class LevelScene(Scene):
             self.stress = max(0, min(self.stress, 100))
             self.grade  = max(0, min(self.grade, 45))
 
-            self.ctx.assets.sound("collision.mpeg").play()
+            self.ctx.assets.sound("collision.ogg").play()
 
     def game_over_state(self):
         return {

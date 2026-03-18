@@ -11,7 +11,7 @@ class MenuScene(Scene):
         self.ctx = ctx
         self.font = self.ctx.assets.font(self.ctx.settings.DEFAULT_FONT, 30)
         self.credits_font = self.ctx.assets.font(self.ctx.settings.DEFAULT_FONT, 15)
-        self.click_sound = self.ctx.assets.sound("click.wav")
+        self.click_sound = self.ctx.assets.sound("click.ogg")
 
         self.hub = Hub(
             Label((self.ctx.settings.WIDTH//2, 150), "IB Survival Game", self.font),
