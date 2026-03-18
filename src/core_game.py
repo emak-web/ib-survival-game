@@ -28,23 +28,23 @@ class Game:
         self.ctx = Context(settings, self.assets)
         self.scene = MenuScene(self.ctx)
 
-    def run(self):
-        while self.running:
-            dt = min(self.clock.tick(settings.FPS)/1000, 0.1)
+    def tick(self):
+        dt = min(self.clock.tick(settings.FPS)/1000, 0.1)
 
-            for event in pygame.event.get():
-                request = self.handle_event(event)
-                if request:
-                    kind, data = request
-                    self.switch(kind, data)
-
-            request = self.update(dt)
+        for event in pygame.event.get():
+            request = self.handle_event(event)
             if request:
                 kind, data = request
                 self.switch(kind, data)
 
-            self.draw()
+        request = self.update(dt)
+        if request:
+            kind, data = request
+            self.switch(kind, data)
 
+        self.draw()
+
+    def quit(self):
         pygame.quit()
 
     def handle_event(self, event):

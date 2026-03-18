@@ -4,6 +4,10 @@ import pygame
 
 import settings
 
+class FakeSound:
+    def play(self):
+        return None
+
 
 class Assets:
     def __init__(self):
@@ -18,6 +22,7 @@ class Assets:
         return self.image_cache[path]
 
     def sound(self, path):
+        return FakeSound()
         if path not in self.sound_cache:
             self.sound_cache[path] = pygame.mixer.Sound(os.path.join(settings.SOUND_DIR, path))
 
